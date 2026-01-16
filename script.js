@@ -12,10 +12,17 @@ function startAnimation( intervalTime) {
 
     intervalId = setInterval(() => {
         // Tüm ışıkları söndür
-        lights.forEach(light => light.classList.remove("active"));
+        lights.forEach(light => {
+            light.classList.remove("active");
+            light.style.backgroundColor = "transparent";
+        });
 
         // Aktif ışığı yak
-        lights[currentIndex].classList.add("active");
+        const activeLight = lights[currentIndex];
+        const color = activeLight.dataset.color;
+
+        activeLight.style.backgroundColor = color;
+        activeLight.classList.add("active");
 
         // Bir sonraki index
         currentIndex++;
