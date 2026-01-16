@@ -36,10 +36,10 @@ h1 {
     padding: 4px;
 }
 
-.lights-container {
+/* .lights-container {
     display: flex;
     gap: 12px;
-}
+} */
 
 .light {
     border-radius: 50%;
@@ -52,4 +52,16 @@ h1 {
 
 .light.active {
     opacity: 1;
+}
+
+#lightsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.light-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
 }

@@ -1,4 +1,4 @@
-const lights = document.querySelectorAll(".light");
+/* const lights = document.querySelectorAll(".light"); */
 const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn");
 const intervalInput = document.getElementById("intervalInput");
@@ -6,6 +6,56 @@ const intervalInput = document.getElementById("intervalInput");
 const intensityInput = document.getElementById("intensityInput");
 
 const sizeInput = document.getElementById("sizeInput");
+
+const lightsWrapper = document.getElementById("lightsWrapper");
+const rowInput = document.getElementById("rowInput");
+
+let lights = [];
+
+const DEFAULT_COLORS = [
+    "#ef4444",
+    "#f59e0b",
+    "#22c55e",
+    "#3b82f6",
+    "#a855f7",
+    "#ec4899",
+    "#eab308"
+];
+
+
+// Işıkları oluşturan function
+function createLights(rows) {
+    lightsWrapper.innerHTML = "";
+    lights = [];
+
+    for (let r = 0; r < rows; r++) {
+        const row = document.createElement("div");
+        row.className = "light-row";
+
+        for (let i = 0; i < 7; i++) {
+            const light = document.createElement("div");
+            light.className = "light";
+            light.dataset.color = DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+
+            row.appendChild(light);
+            lights.push(light);
+        }
+
+        lightsWrapper.appendChild(row);
+    }
+
+    applyLightSize(Number(sizeInput.value));
+}
+
+rowInput.addEventListener("change", () => {
+    stopAnimation();
+    currentIndex = 0;
+    createLights(Number(rowInput.value));
+});
+
+createLights(Number(rowInput.value));
+
+/*************************************** */
 
 function applyLightSize(size) {
     lights.forEach(light => {
