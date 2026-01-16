@@ -1,12 +1,12 @@
 const lights = document.querySelectorAll(".light");
 const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn");
+const intervalInput = document.getElementById("intervalInput");
 
 let currentIndex = 0;
 let intervalId = null;
-const DEFAULT_INTERVAL = 500;
 
-function startAnimation( intervalTime = DEFAULT_INTERVAL) {
+function startAnimation( intervalTime) {
     // Eğer animasyon zaten çalışıyorsa tekrar başlatma
     if (intervalId !== null) return;
 
@@ -36,13 +36,22 @@ function stopAnimation() {
 }
 
 startBtn.addEventListener("click", () => {
-    startAnimation();
+    const intervalTime = Number(intervalInput.value) || 500;
+    startAnimation(intervalTime);
 } );
 
 stopBtn.addEventListener("click" , () => {
     stopAnimation();
 } );
 
+// Interval değiştiğinde animasyonu güncelle
+intervalInput.addEventListener("change", ()=> {
+    if (intervalId !== null) {
+        stopAnimation();
+        const intervalTime = Number(intervalInput.value) || 500; // Boş veya hatalı bir değer kullanılırsa 500 ms kullanılır.
+        startAnimation(intervalTime);
+    }
+});
 
 
 /* 
