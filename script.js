@@ -3,6 +3,8 @@ const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn");
 const intervalInput = document.getElementById("intervalInput");
 
+const intensityInput = document.getElementById("intensityInput");
+
 let currentIndex = 0;
 let intervalId = null;
 
@@ -15,13 +17,18 @@ function startAnimation( intervalTime) {
         lights.forEach(light => {
             light.classList.remove("active");
             light.style.backgroundColor = "transparent";
+            light.style.opacity = "0.4";
+            light.style.boxShadow = "none";
         });
 
         // Aktif ışığı yak
         const activeLight = lights[currentIndex];
         const color = activeLight.dataset.color;
+        const intensity = Number(intensityInput.value);
 
         activeLight.style.backgroundColor = color;
+        activeLight.style.opacity = intensity;
+        activeLight.style.boxShadow = `0 0 ${20 * intensity}px ${6 * intensity}px ${color}`;
         activeLight.classList.add("active");
 
         // Bir sonraki index
@@ -59,6 +66,19 @@ intervalInput.addEventListener("change", ()=> {
         startAnimation(intervalTime);
     }
 });
+
+// Yoğunluk değiştiğinde aktif ışık varsa hemen güncellensin
+intensityInput.addEventListener("input", () => {
+    const activeLight = document.querySelector(".light.active");
+    if (!activeLight) return;
+
+    const intensity = Number(intensityInput.value);
+    const color = activeLight.dataset.color;
+
+    activeLight.style.opacity = intensity;
+    activeLight.style.boxShadow = `0 0 ${20 * intensity}px ${6 * intensity}px ${color}`;
+});
+
 
 
 /* 

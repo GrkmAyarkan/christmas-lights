@@ -52,5 +52,4 @@ h1 {
 
 .light.active {
     opacity: 1;
-    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.8);
 }
