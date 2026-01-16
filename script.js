@@ -5,6 +5,21 @@ const intervalInput = document.getElementById("intervalInput");
 
 const intensityInput = document.getElementById("intensityInput");
 
+const sizeInput = document.getElementById("sizeInput");
+
+function applyLightSize(size) {
+    lights.forEach(light => {
+        light.style.width = `${size}px`;
+        light.style.height = `${size}px`;
+    });
+}
+
+applyLightSize(Number(sizeInput.value));
+
+sizeInput.addEventListener("input", () => {
+    applyLightSize(Number(sizeInput.value));
+});
+
 let currentIndex = 0;
 let intervalId = null;
 
@@ -78,7 +93,6 @@ intensityInput.addEventListener("input", () => {
     activeLight.style.opacity = intensity;
     activeLight.style.boxShadow = `0 0 ${20 * intensity}px ${6 * intensity}px ${color}`;
 });
-
 
 
 /* 

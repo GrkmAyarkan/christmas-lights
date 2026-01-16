@@ -42,9 +42,9 @@ h1 {
 }
 
 .light {
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease, width 0.2s, height 0.2s;
     background-color: transparent;
     opacity: 0.4;
     transition: opacity 0.3s ease, box-shadow 0.3s ease;
